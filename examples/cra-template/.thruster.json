@@ -1,0 +1,7 @@
+{
+  "template": ".",
+  "ignore": [
+    "node_modules",
+    ".travis.yml"
+  ]
+}
