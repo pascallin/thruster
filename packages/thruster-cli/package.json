@@ -1,0 +1,20 @@
+{
+  "name": "thruster-cli",
+  "version": "1.0.0",
+  "description": "thruster cli tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pascallin/thruster/packages/thruster-cli"
+  },
+  "keywords": [
+    "cli",
+    "thruster",
+    "template"
+  ],
+  "author": "pascal_lin",
+  "license": "ISC"
+}
