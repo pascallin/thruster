@@ -8,7 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pascallin/thruster/packages/thruster-cli"
+    "url": "https://github.com/pascallin/thruster",
+    "directory": "packages/thruster-cli"
   },
   "keywords": [
     "cli",
@@ -16,5 +17,15 @@
     "template"
   ],
   "author": "pascal_lin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^7.1.0",
+    "cross-spawn": "^7.0.3",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^9.1.0",
+    "ora": "^5.3.0",
+    "prompts": "^2.4.0",
+    "validate-npm-package-name": "^3.0.0"
+  }
 }
