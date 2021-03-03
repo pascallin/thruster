@@ -8,11 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pascallin/thruster/packages/thruster"
+    "url": "https://github.com/pascallin/thruster",
+    "directory": "packages/thruster"
   },
   "keywords": [
     "template"
   ],
   "author": "pascal_lin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^9.1.0"
+  }
 }
