@@ -4,7 +4,8 @@
   "description": "For creating a npm package as a project template",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": ""
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,10 @@
   "author": "pascal_lin",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.0",
     "fs-extra": "^9.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.8"
   }
 }
