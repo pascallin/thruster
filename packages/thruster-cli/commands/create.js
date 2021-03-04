@@ -5,7 +5,7 @@ const os = require('os');
 const path = require('path');
 const spawn = require('cross-spawn');
 const fs = require('fs-extra');
-const thruster = require('thruster');
+const { Thruster } = require('thruster');
 
 const { checkThatNpmCanReadCwd, checkAppName } = require('../utils');
 
@@ -104,8 +104,11 @@ async function loadNpmTemplate(npmPackageName) {
   return path.join(root, 'node_modules', npmPackageName);
 }
 
-async function loadTemplate(template) {
-  thruster.init(template);
+async function loadTemplate(templatePath) {
+  thruster = new Thruster({
+    templatePath,
+  });
+  await thruster.start();
 }
 
 module.exports = {

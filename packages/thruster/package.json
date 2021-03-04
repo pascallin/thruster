@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": ""
+    "watch": "tsc --watch",
+    "compile": "tsc"
   },
   "repository": {
     "type": "git",
