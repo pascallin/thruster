@@ -1,7 +1,9 @@
 {
-  "template": ".",
+  "templatePath": ".",
   "ignore": [
-    "node_modules",
-    ".travis.yml"
-  ]
+    ".env"
+  ],
+  "dependencies": {
+
+  }
 }
