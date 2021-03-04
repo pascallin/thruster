@@ -1,5 +1,5 @@
 function list() {
-  console.log("listing");
+  console.log('listing');
 }
 
 module.exports = {

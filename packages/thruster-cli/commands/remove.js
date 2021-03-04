@@ -1,7 +1,5 @@
-async function remove() {
-
-}
+async function remove() {}
 
 module.exports = {
-  remove
-}
+  remove,
+};

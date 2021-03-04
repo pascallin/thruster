@@ -1,7 +1,5 @@
-async function clean() {
-
-}
+async function clean() {}
 
 module.exports = {
-  clean
-}
+  clean,
+};

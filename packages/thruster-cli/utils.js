@@ -29,7 +29,7 @@ function checkThatNpmCanReadCwd() {
   // "; cwd = C:\path\to\current\dir" (unquoted)
   // I couldn't find an easier way to get it.
   const prefix = '; cwd = ';
-  const line = lines.find(line => line.startsWith(prefix));
+  const line = lines.find((line) => line.startsWith(prefix));
   if (typeof line !== 'string') {
     // Fail gracefully. They could remove it.
     return true;
@@ -42,25 +42,19 @@ function checkThatNpmCanReadCwd() {
     chalk.red(
       `Could not start an npm process in the right directory.\n\n` +
         `The current directory is: ${chalk.bold(cwd)}\n` +
-        `However, a newly started npm process runs in: ${chalk.bold(
-          npmCWD
-        )}\n\n` +
-        `This is probably caused by a misconfigured system terminal shell.`
-    )
+        `However, a newly started npm process runs in: ${chalk.bold(npmCWD)}\n\n` +
+        `This is probably caused by a misconfigured system terminal shell.`,
+    ),
   );
   if (process.platform === 'win32') {
     console.error(
       chalk.red(`On Windows, this can usually be fixed by running:\n\n`) +
-        `  ${chalk.cyan(
-          'reg'
-        )} delete "HKCU\\Software\\Microsoft\\Command Processor" /v AutoRun /f\n` +
-        `  ${chalk.cyan(
-          'reg'
-        )} delete "HKLM\\Software\\Microsoft\\Command Processor" /v AutoRun /f\n\n` +
+        `  ${chalk.cyan('reg')} delete "HKCU\\Software\\Microsoft\\Command Processor" /v AutoRun /f\n` +
+        `  ${chalk.cyan('reg')} delete "HKLM\\Software\\Microsoft\\Command Processor" /v AutoRun /f\n\n` +
         chalk.red(`Try to run the above two lines in the terminal.\n`) +
         chalk.red(
-          `To learn more about this problem, read: https://blogs.msdn.microsoft.com/oldnewthing/20071121-00/?p=24433/`
-        )
+          `To learn more about this problem, read: https://blogs.msdn.microsoft.com/oldnewthing/20071121-00/?p=24433/`,
+        ),
     );
   }
   return false;
@@ -70,20 +64,13 @@ function checkAppName(appName) {
   const validationResult = validateProjectName(appName);
   if (!validationResult.validForNewPackages) {
     console.error(
-      chalk.red(
-        `Cannot create a project named ${chalk.green(
-          `"${appName}"`
-        )} because of npm naming restrictions:\n`
-      )
+      chalk.red(`Cannot create a project named ${chalk.green(`"${appName}"`)} because of npm naming restrictions:\n`),
     );
-    [
-      ...(validationResult.errors || []),
-      ...(validationResult.warnings || []),
-    ].forEach(error => {
+    [...(validationResult.errors || []), ...(validationResult.warnings || [])].forEach((error) => {
       console.error(chalk.red(`  * ${error}`));
     });
     console.error(chalk.red('\nPlease choose a different project name.'));
-    return false
+    return false;
   }
 
   // TODO: there should be a single place that holds the dependencies
@@ -92,20 +79,20 @@ function checkAppName(appName) {
     console.error(
       chalk.red(
         `Cannot create a project named ${chalk.green(
-          `"${appName}"`
+          `"${appName}"`,
         )} because a dependency with the same name exists.\n` +
-          `Due to the way npm works, the following names are not allowed:\n\n`
+          `Due to the way npm works, the following names are not allowed:\n\n`,
       ) +
-        chalk.cyan(dependencies.map(depName => `  ${depName}`).join('\n')) +
-        chalk.red('\n\nPlease choose a different project name.')
+        chalk.cyan(dependencies.map((depName) => `  ${depName}`).join('\n')) +
+        chalk.red('\n\nPlease choose a different project name.'),
     );
-    return false
+    return false;
   }
 
-  return true
+  return true;
 }
 
 module.exports = {
   checkThatNpmCanReadCwd,
-  checkAppName
-}
+  checkAppName,
+};

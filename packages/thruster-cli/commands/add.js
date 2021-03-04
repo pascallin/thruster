@@ -1,7 +1,5 @@
-async function add() {
-
-}
+async function add() {}
 
 module.exports = {
-  add
-}
+  add,
+};
