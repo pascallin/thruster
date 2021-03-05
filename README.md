@@ -27,7 +27,7 @@ You can push git repository or publish it to npm registry.
 1. install thruster-cli
 
 ```shell
-npm install -g thruster-cli
+npm install -g @thruster/cli
 ```
 
 2. create project
@@ -35,19 +35,49 @@ npm install -g thruster-cli
 You can create project from npm registry or remote git repository
 
 ```shell
-thruster-cli create <project name> --from npm -r deco-brick-template
+thruster create --from git --resource <git host>:<user name>/<repository>#<branch> --path [relative path] <project name>
+# example: thruster create --from git --resource https://github.com:pascallin/thruster#main --path examples/cra-template testproj
 ```
 
 ```shell
-thruster-cli create <project name> --from git -r https://github.com/pascallin/deco-brick-cli#template
+thruster create --from local --resource <absolute path in localhost> <project name>
+# example: thruster create --from local --resource ~/Development/pascal-github/thruster --path examples/cra-template testproj
 ```
 
+## Use case
+
+### Examples
+
+suppose you have a git repository like
+
 ```shell
-thruster-cli create <project name> --from local -r <absolute path in localhost>
+.
+├──examples
+|   ├──examples-template
+|     |── ...
+├──src
+│   |── ...
+├── package.json
+|── ...
 ```
+
+you can add thruster to examples for start a specific example quickly by
+
+```shell
+thruster-cli create <project name> --from git -r <your git repository>/path/to/your/example#[branch]
+```
+
+### Basic Template
+
+suppose you want to create a react front-end project as a template, you can create a github repository and add thruster to it. Otherwise, if you want to manage your template as npm package, it is still working with thruster.
 
 ## thruster template configuration
 
 - **templatePath**, will copy whole folder as work directory
 - **ignore**, it will not copy from template folder. There are some default ignore files, check docs.
 - **extra**, it will merge to package.json, please ensure dependencies and devDependencies was in here if your template package needed.
+
+## TODO:
+
+- [] npm resource support
+- [] manage template in localhost machine
