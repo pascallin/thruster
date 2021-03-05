@@ -34,16 +34,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set owner as committer
-        run: |
-          git config user.name "pascallin"
-          git config user.email "pascal_lin@foxmail.com"
       - uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - name: Create new version and Publish to NPM
+      - name: Set owner as committer
         run: |
+          git config user.name "pascallin"
+          git config user.email "pascal_lin@foxmail.com"
+      - run: |
           yarn
           npm whoami
           if [ "none" != "${{ github.event.inputs.version }}" ]; then
