@@ -28,29 +28,8 @@ jobs:
       - run: yarn
       - run: yarn test
 
-  git-version:
-    needs: build
-    name: Create git tag and commit
-    runs-on: ubuntu-latest
-    outputs:
-      branch: ${{ steps.push.outputs.branch }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Set owner as committer
-        run: |
-          git config user.name "pascallin"
-          git config user.email "pascal_lin@foxmail.com"
-      - name: Create new version
-        run: |
-          yarn
-          if [ "none" != "${{ github.event.inputs.version }}" ]; then
-            yarn lerna version ${{ github.event.inputs.version }} --yes
-          fi
-
   release-and-publish-npm:
-    name: Release a git tag and publish to npm registry
+    name: Release a git tag and publish to NPM registry
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +43,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - name: Create new version and Publish to NPM
-      - run: |
+        run: |
           yarn
           npm whoami
           if [ "none" != "${{ github.event.inputs.version }}" ]; then
