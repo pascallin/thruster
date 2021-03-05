@@ -61,15 +61,11 @@ suppose you have a git repository like
 |── ...
 ```
 
-you can add thruster to examples for start a specific example quickly by
-
-```shell
-thruster-cli create <project name> --from git -r <your git repository>/path/to/your/example#[branch]
-```
+you can add thruster a `.thruster.json` to your examples, and then you can quickly start a specific example.
 
 ### Basic Template
 
-suppose you want to create a react front-end project as a template, you can create a github repository and add thruster to it. Otherwise, if you want to manage your template as npm package, it is still working with thruster.
+suppose you want to create a react front-end project as a template, you can create a github repository and add thruster to it.
 
 ## thruster template configuration
 
