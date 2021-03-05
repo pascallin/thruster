@@ -44,7 +44,7 @@ jobs:
       - name: Create new version
         run: |
           yarn
-          yarn lerna version --yes ${{ github.event.inputs.version }}
+          yarn lerna version --yes ${{ github.event.inputs.version }} --since
 
   publish-npm:
     needs: git-version
@@ -56,6 +56,6 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: yarn
-      - run: yarn lerna publish --yes --from-package
+      - run: yarn lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
