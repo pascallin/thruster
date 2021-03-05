@@ -44,7 +44,7 @@ jobs:
       - name: Create new version
         run: |
           yarn
-          yarn lerna version --yes ${{ github.event.inputs.version }} --since
+          yarn lerna version ${{ github.event.inputs.version }} --yes
 
   publish-npm:
     needs: git-version
