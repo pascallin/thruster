@@ -4,11 +4,11 @@
   "description": "For creating a npm package as a project template",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "start:dev": "lerna run --scope=@thruster/core --stream --parallel watch",
-    "compile:ts": "lerna run --scope=@thruster/core --stream compile"
+    "watch": "lerna run --scope=@thruster/core --stream --parallel watch",
+    "compile:ts": "lerna run --scope=@thruster/core --stream compile",
+    "test": "lerna run test --since"
   },
   "repository": {
     "type": "git",
