@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const spawn = require('cross-spawn');
 const validateProjectName = require('validate-npm-package-name');
+const fs = require('fs-extra');
 
 // NOTE: mostly copy from https://github.com/facebook/create-react-app
 
@@ -92,7 +93,22 @@ function checkAppName(appName) {
   return true;
 }
 
+function checkDir(path) {
+  if (fs.pathExistsSync(path)) {
+    console.log();
+    console.error(
+      chalk.red(`Cannot create diretory ${chalk.green(`"${path}"`)} because a directory with the same name exists.\n`) +
+        chalk.red('\nPlease choose a different project name.'),
+    );
+    console.log();
+    return false;
+  }
+  fs.ensureDirSync(path);
+  return true;
+}
+
 module.exports = {
   checkThatNpmCanReadCwd,
   checkAppName,
+  checkDir,
 };

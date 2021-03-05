@@ -7,7 +7,7 @@ const spawn = require('cross-spawn');
 const fs = require('fs-extra');
 const { Thruster } = require('thruster');
 
-const { checkThatNpmCanReadCwd, checkAppName } = require('../utils');
+const { checkThatNpmCanReadCwd, checkAppName, checkDir } = require('../utils');
 
 let projectName;
 let root;
@@ -18,8 +18,6 @@ let root;
  * @param {object} options { url: string, root: string, package: string, path: string }
  */
 async function create(appName, type, options) {
-  console.log(appName, type, options);
-
   if (!checkAppName(appName)) {
     process.exit(1);
   }
@@ -31,21 +29,21 @@ async function create(appName, type, options) {
   root = path.resolve(appName);
   let template;
 
-  fs.ensureDirSync(root);
-  initProject();
+  if (!checkDir(root)) {
+    process.exit(1);
+  }
+
+  const { resource } = options;
 
   switch (type) {
     case 'git':
-      const { url } = options;
-      template = await loadGitTemplate(url);
+      template = await loadGitTemplate(resource);
       break;
     case 'npm':
-      const { package } = options;
-      template = await loadNpmTemplate(package);
+      template = await loadNpmTemplate(resource);
       break;
     case 'local':
-      const { path: templatePath } = options;
-      template = templatePath;
+      template = resource;
       break;
     default:
       console.log(chalk.red('please using a valid type for create project.'));
@@ -55,17 +53,10 @@ async function create(appName, type, options) {
   await loadTemplate(template);
 }
 
-async function initProject() {
-  const packageJson = {
-    name: projectName,
-    version: '0.1.0',
-    private: true,
-  };
-  fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
-}
-
 async function loadGitTemplate(url) {
+  console.log();
   console.log('temp directory:', chalk.yellow(path.join(os.tmpdir(), 'thruster', projectName)));
+  console.log();
   const spinner = ora(`downing template from git(${url})...`).start();
   download(url, path.join(os.tmpdir(), 'thruster', projectName), (err) => {
     if (err) {
@@ -105,10 +96,23 @@ async function loadNpmTemplate(npmPackageName) {
 }
 
 async function loadTemplate(templatePath) {
+  const spinner = ora(`start execute thruster...`).start();
   thruster = new Thruster({
+    projectName,
     templatePath,
+    targetPath: root,
   });
-  await thruster.start();
+  try {
+    await thruster.start();
+    spinner.text = `execute thruster succeed.`;
+    spinner.succeed();
+  } catch (err) {
+    console.log();
+    console.log(chalk.red('Error: ' + err.message));
+    console.log();
+    spinner.fail();
+  }
+  return;
 }
 
 module.exports = {
