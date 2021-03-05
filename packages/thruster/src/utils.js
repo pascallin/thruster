@@ -56,6 +56,11 @@ function isSafeToCreateProjectIn(root, name) {
         console.log('Either try using a new directory name, or remove the files listed above.');
         return false;
     }
+    fs_extra_1.default.readdirSync(root).forEach(function (file) {
+        if (isErrorLog(file)) {
+            fs_extra_1.default.removeSync(path_1.default.join(root, file));
+        }
+    });
     return true;
 }
 module.exports = {

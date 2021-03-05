@@ -63,11 +63,11 @@ function isSafeToCreateProjectIn(root: string, name: string) {
   }
 
   // Remove any log files from a previous installation.
-  // fs.readdirSync(root).forEach(file => {
-  //   if (isErrorLog(file)) {
-  //     fs.removeSync(path.join(root, file));
-  //   }
-  // });
+  fs.readdirSync(root).forEach(file => {
+    if (isErrorLog(file)) {
+      fs.removeSync(path.join(root, file));
+    }
+  });
   return true;
 }
 

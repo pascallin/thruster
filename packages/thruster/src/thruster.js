@@ -42,17 +42,74 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Thruster = void 0;
 var fs_extra_1 = __importDefault(require("fs-extra"));
 var path_1 = __importDefault(require("path"));
+var os_1 = __importDefault(require("os"));
+var ramda_1 = __importDefault(require("ramda"));
+var defaultIgnoreFilePattern = ['node_modules', '.thruster.json', 'package.json', '.npmignore'];
+var errorLogFilePatterns = ['npm-debug.log', 'yarn-error.log', 'yarn-debug.log'];
 var Thruster = (function () {
-    function Thruster(config) {
-        var templatePath = config.templatePath;
-        this.templatePath = templatePath;
+    function Thruster(options) {
+        this.options = options;
+        var templatePath = options.templatePath;
         fs_extra_1.default.ensureFileSync(path_1.default.join(templatePath, '.thruster.json'));
-        config = fs_extra_1.default.readJsonSync(path_1.default.join(templatePath, '.thruster.json'));
-        console.log(config);
+        this.config = fs_extra_1.default.readJsonSync(path_1.default.join(templatePath, '.thruster.json'));
     }
     Thruster.prototype.start = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var err_1;
             return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4, this.createPackageJson()];
+                    case 1:
+                        _a.sent();
+                        return [4, this.copyTemplateFiles()];
+                    case 2:
+                        _a.sent();
+                        return [2];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw err_1;
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Thruster.prototype.createPackageJson = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var packageJson;
+            return __generator(this, function (_a) {
+                packageJson = {
+                    name: this.options.projectName,
+                    version: '0.1.0',
+                    private: true,
+                };
+                if (this.config.extra) {
+                    packageJson = ramda_1.default.mergeRight(packageJson, this.config.extra);
+                }
+                fs_extra_1.default.writeFileSync(path_1.default.join(this.options.targetPath, 'package.json'), JSON.stringify(packageJson, null, 2) + os_1.default.EOL);
+                return [2];
+            });
+        });
+    };
+    Thruster.prototype.copyTemplateFiles = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var filterFunc;
+            var _this = this;
+            return __generator(this, function (_a) {
+                filterFunc = function (src, dest) {
+                    var allIgnoreFiles = defaultIgnoreFilePattern.concat(_this.config.ignore || []).concat(errorLogFilePatterns);
+                    for (var _i = 0, allIgnoreFiles_1 = allIgnoreFiles; _i < allIgnoreFiles_1.length; _i++) {
+                        var ignore = allIgnoreFiles_1[_i];
+                        if (src.indexOf(ignore) > -1) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+                fs_extra_1.default.copySync(this.options.templatePath + "/" + this.config.templatePath, this.options.targetPath, {
+                    filter: filterFunc,
+                });
                 return [2];
             });
         });
