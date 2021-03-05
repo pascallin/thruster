@@ -75,5 +75,5 @@ suppose you want to create a react front-end project as a template, you can crea
 
 ## TODO:
 
-- [] npm resource support
-- [] manage template in localhost machine
+- [ ] npm resource support
+- [ ] manage template in localhost machine
