@@ -26,7 +26,8 @@ function init() {
     .command('create <projectName>')
     .description('create a project base on specific thruster template')
     .option('--from <type>', 'get template from resource base on type: [local | git | npm | thruster]')
-    .option('--resource, -r [resource]', '[git repository URL | npm package name | localhost template path]')
+    .option('--resource <resource>', '[git repository URL | localhost template path]')
+    .option('--path [path]', 'template path from resource')
     .action(async (name, options) => {
       await create(name, options.from, options);
     });

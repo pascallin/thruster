@@ -15,6 +15,6 @@ if (major < 10) {
   process.exit(1);
 }
 
-const { init } = require('./app');
+const { init } = require('../app');
 
 init();
