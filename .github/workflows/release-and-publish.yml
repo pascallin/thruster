@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    needs: git-version
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -27,9 +27,9 @@ jobs:
       - run: yarn test
 
   git-version:
+    needs: build
     name: Create git tag and commit
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
     outputs:
       branch: ${{ steps.push.outputs.branch }}
     steps:
@@ -43,10 +43,11 @@ jobs:
           git config user.email "pascal_lin@foxmail.com"
       - name: Create new version
         run: |
+          yarn
           yarn lerna version --yes patch
 
   publish-npm:
-    needs: build
+    needs: git-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -54,6 +55,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - run: yarn
       - run: yarn lerna publish --yes --from-package
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
