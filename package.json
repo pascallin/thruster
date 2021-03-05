@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "start:dev": "lerna run --scope=thruster --stream --parallel watch",
-    "compile:ts": "lerna run --scope=thruster --stream compile"
+    "start:dev": "lerna run --scope=@thruster/core --stream --parallel watch",
+    "compile:ts": "lerna run --scope=@thruster/core --stream compile"
   },
   "repository": {
     "type": "git",
