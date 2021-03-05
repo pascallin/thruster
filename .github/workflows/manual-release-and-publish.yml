@@ -42,8 +42,9 @@ jobs:
         run: |
           git config user.name "pascallin"
           git config user.email "pascal_lin@foxmail.com"
-      - run: |
-          yarn
+      - run: yarn
+      - name: version and publish
+      - run: /
           npm whoami
           if [ "none" != "${{ github.event.inputs.version }}" ]; then
             yarn lerna version ${{ github.event.inputs.version }} --yes
