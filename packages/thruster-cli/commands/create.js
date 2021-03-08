@@ -35,6 +35,7 @@ async function create(appName, type, options) {
 
   const { resource, path: templateRelativePath } = options;
 
+  let exitCode = 0;
   try {
     switch (type) {
       case 'git':
@@ -66,12 +67,13 @@ async function create(appName, type, options) {
     console.log(chalk.red('Error: ' + err.stack));
     console.log();
     fs.removeSync(root);
+    exitCode = 1;
   } finally {
     // NOTE: remove temp git template if needed
     if (type == 'git') {
       fs.removeSync(path.join(os.tmpdir(), 'thruster'));
     }
-    process.exit(1);
+    process.exit(exitCode);
   }
 }
 
