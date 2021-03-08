@@ -3,9 +3,9 @@
   "version": "1.0.6",
   "description": "thruster cli tools",
   "bin": {
-    "thruster": "./bin/thruster"
+    "thruster": "./bin/thruster.js"
   },
-  "main": "./bin/thruster",
+  "main": "./bin/thruster.js",
   "scripts": {
     "test": "echo \"no test specified\" && exit 0"
   },
