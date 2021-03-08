@@ -44,7 +44,7 @@ jobs:
           git config user.email "pascal_lin@foxmail.com"
       - run: npm install
       - name: version and publish
-        run: | instal
+        run: |
           if [ "none" != "${{ github.event.inputs.version }}" ]; then
             npx lerna version ${{ github.event.inputs.version }} --yes
           fi
