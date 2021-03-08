@@ -42,12 +42,12 @@ jobs:
         run: |
           git config user.name "pascallin"
           git config user.email "pascal_lin@foxmail.com"
-      - run: yarn
+      - run: npm
       - name: version and publish
         run: |
           if [ "none" != "${{ github.event.inputs.version }}" ]; then
-            yarn lerna version ${{ github.event.inputs.version }} --yes
+            npx lerna version ${{ github.event.inputs.version }} --yes
           fi
-          yarn lerna publish from-package --yes
+          npx lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
