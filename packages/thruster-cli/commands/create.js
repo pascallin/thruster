@@ -46,7 +46,7 @@ async function create(appName, type, options) {
       case 'local':
         template = resource;
         if (templateRelativePath) {
-          template = path.join(tempDir, templateRelativePath);
+          template = path.join(template, templateRelativePath);
         }
         break;
       default:
