@@ -45,7 +45,6 @@ jobs:
       - run: yarn
       - name: version and publish
         run: |
-          npm whoami
           if [ "none" != "${{ github.event.inputs.version }}" ]; then
             yarn lerna version ${{ github.event.inputs.version }} --yes
           fi
