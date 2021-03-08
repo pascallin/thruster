@@ -1,6 +1,6 @@
 {
   "name": "@thruster/core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "For creating a npm package as a project template",
   "main": "index.js",
   "scripts": {
