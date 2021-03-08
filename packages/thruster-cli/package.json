@@ -2,7 +2,10 @@
   "name": "@thruster/cli",
   "version": "1.0.3",
   "description": "thruster cli tools",
-  "main": "index.js",
+  "bin": {
+    "thruster": "./bin/thruster"
+  },
+  "main": "./bin/thruster",
   "scripts": {
     "test": "echo \"no test specified\" && exit 0"
   },
