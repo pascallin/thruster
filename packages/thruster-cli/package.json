@@ -1,6 +1,6 @@
 {
   "name": "@thruster/cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "thruster cli tools",
   "bin": {
     "thruster": "./bin/thruster.js"
