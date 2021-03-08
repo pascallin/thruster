@@ -13,6 +13,10 @@
     "url": "https://github.com/pascallin/thruster",
     "directory": "packages/thruster"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "keywords": [
     "template"
   ],

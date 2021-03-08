@@ -6,10 +6,6 @@
   "command": {
     "version": {
       "allowBranch": "main"
-    },
-    "publishConfig": {
-      "access": "public",
-      "registry": "https://registry.npmjs.org"
     }
   }
 }

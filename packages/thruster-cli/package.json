@@ -11,6 +11,10 @@
     "url": "https://github.com/pascallin/thruster",
     "directory": "packages/thruster-cli"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "keywords": [
     "cli",
     "thruster",
