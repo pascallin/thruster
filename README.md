@@ -78,6 +78,7 @@ example:
 ```json
 {
   "templatePath": ".",
+  "ignore": ".travis.yml",
   "extra": {
     "dependencies": {
       "axios": "^0.21.0"
