@@ -73,6 +73,22 @@ suppose you want to create a react front-end project as a template, you can crea
 - **ignore**, it will not copy from template folder. There are some default ignore files, check docs.
 - **extra**, it will merge to package.json, please ensure dependencies and devDependencies was in here if your template package needed.
 
+example:
+
+```json
+{
+  "templatePath": ".",
+  "extra": {
+    "dependencies": {
+      "axios": "^0.21.0"
+    },
+    "devDependencies": {
+      "eslint": "^7.12.1"
+    }
+  }
+}
+```
+
 ## TODO:
 
 - [ ] npm resource support
