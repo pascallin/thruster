@@ -4,7 +4,11 @@
   <img width="200" height="200" src="./icon.svg">
 </p>
 
-For better experience creating a npm package as a project template
+For better experience creating a project template
+
+## Motivation 
+
+Trying to build a cli tool like [Yeoman](https://yeoman.io/) but easier to use base on a config file. 
 
 ## How to use?
 
