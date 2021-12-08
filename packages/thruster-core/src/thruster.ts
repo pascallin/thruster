@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import os from 'os';
-import R from "ramda";
+import R from 'ramda';
 
 export interface ThrusterOptions {
   projectName: string;
@@ -22,12 +22,9 @@ export class Thruster {
   private options: ThrusterOptions;
   private config: ThrusterConfig;
 
-  constructor(options: ThrusterOptions) {
+  constructor(options: ThrusterOptions, config: ThrusterConfig) {
     this.options = options;
-    const { templatePath } = options;
-
-    fs.ensureFileSync(path.join(templatePath, '.thruster.json'));
-    this.config = fs.readJsonSync(path.join(templatePath, '.thruster.json'));
+    this.config = config;
   }
 
   public async start(): Promise<void> {

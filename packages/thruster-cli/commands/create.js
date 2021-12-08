@@ -99,10 +99,10 @@ async function loadGitTemplate(url, relativePath) {
     spinner.text = 'downing template from git succeed.';
     spinner.succeed();
   } catch (err) {
+    fs.removeSync(tempDir);
     console.log(chalk.red('Error: ' + err.stack));
     console.log(chalk.red('Download failed. Please confirm your git repository URL.'));
     spinner.fail();
-    fs.removeSync(tempDir);
   }
 
   if (relativePath) {
@@ -148,12 +148,34 @@ async function loadTemplate(templatePath) {
       }),
     ),
   );
-  thruster = new Thruster({
-    projectName,
-    templatePath,
-    targetPath: root,
-  });
+  console.log();
+
+  const configSpinner = ora(`start reading thruster config...`).start();
+  let thrusterConfig;
   try {
+    fs.ensureFileSync(path.join(templatePath, '.thruster.json'));
+    thrusterConfig = fs.readJsonSync(path.join(templatePath, '.thruster.json'), { encoding: 'utf-8' });
+    console.log(chalk.yellow(`thruster config: ${JSON.stringify(thrusterConfig)}`));
+    spinner.text = `reading thruster config succeed.`;
+    spinner.succeed();
+  } catch (e) {
+    configSpinner.text = `reading thruster config failed: ${e.message}`;
+    configSpinner.fail();
+
+    console.log();
+    console.log(chalk.red('Error: ' + e.message));
+    console.log();
+  }
+
+  try {
+    const thruster = new Thruster(
+      {
+        projectName,
+        templatePath,
+        targetPath: root,
+      },
+      thrusterConfig,
+    );
     await thruster.start();
     spinner.text = `execute thruster succeed.`;
     spinner.succeed();
